@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
+      xml:lang="en"
+      lang="en">
+<head>
+    <title>Category Page</title>
+    <link rel="stylesheet" href="css/AdminModule.css">
+</head>
+
+<body>
+    <div class="pageWrapper">
+
+        <div id="header">
+            <h2>Category</h2>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="pageContentBlockFullSize">
+
+            <div class="pageContentLeftMedium">
+                <h3 wicket:id="categoryName"></h3>
+                <p wicket:id="categoryDescription"></p>
+            </div>
+
+            <div class="pageContentRightMedium">
+                <h3>Products in category:</h3>
+                <ul>
+                    <li wicket:id="productList">
+                        <a href="#" wicket:id="linkToProduct">
+                            <wicket:container wicket:id="linksText"/>
+                        </a>
+                        <br/>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

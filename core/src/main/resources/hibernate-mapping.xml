@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.logicify.shoppingcart.domain">
+
+    <class name="Product" schema="shopping_cart" table="product">
+        <id name="id" column="id_product" type="java.lang.Long">
+            <generator class="native">
+                <param name="sequence">shopping_cart.product_id_seq</param>
+            </generator>
+        </id>
+        <property name="name" column="name" type="java.lang.String"/>
+        <property name="description" column="description" type="java.lang.String"/>
+        <property name="price" column="price" type="java.math.BigDecimal"/>
+        <property name="date" column="date" type="java.util.Date"/>
+
+        <set name="categories" schema="shopping_cart" table="product_to_category" lazy="false">
+            <key column="product_id"/>
+            <many-to-many column="category_id" class="com.logicify.shoppingcart.domain.Category"/>
+        </set>
+
+    </class>
+
+
+    <class name="Category" schema="shopping_cart" table="category">
+        <id name="id" column="id_category" type="java.lang.Long">
+            <generator class="native">
+                <param name="sequence">shopping_cart.category_id_seq</param>
+            </generator>
+        </id>
+        <property name="name" column="name" type="java.lang.String"/>
+        <property name="description" column="description" type="java.lang.String"/>
+        <property name="date" column="date" type="java.util.Date"/>
+
+        <set name="products" schema="shopping_cart" table="product_to_category" lazy="true">
+            <key column="category_id"/>
+            <many-to-many column="product_id" class="com.logicify.shoppingcart.domain.Product"/>
+        </set>
+
+    </class>
+
+
+</hibernate-mapping>
