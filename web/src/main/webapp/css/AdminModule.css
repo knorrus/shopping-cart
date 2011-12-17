@@ -36,3 +36,9 @@
     text-align: center;
     border: 2px solid red;
 }
+
+.insertProductForm input[type="text"] {
+    width: 100%;
+    border: 2px solid #fa8072;
+
+}

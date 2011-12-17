@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
+      xml:lang="en"
+      lang="en">
+<head>
+    <title>Product insert page</title>
+    <link rel="stylesheet" href="css/AdminModule.css"/>
+    <script type="text/javascript" language="javascript" src="js/jquery-1.6.4.js"></script>
+</head>
+
+<body>
+    <div class="pageWrapper">
+
+        <div id="header">
+            <h2>Product Insert</h2>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="pageContentBlockFullSize">
+
+            <div class="pageContentLeftMedium">
+                <form class="insertProductForm"  wicket:id="form">
+                    <table>
+                        <tr>
+                            <td>Product name: </td>
+                            <td><input type="text" wicket:id="ProductName"></td>
+                        </tr>
+                        <tr>
+                            <td>Product price: </td>
+                            <td><input type="text" wicket:id="ProductPrice"></td>
+                        </tr>
+                        <tr>
+                            <td>Product description: </td>
+                            <td><textarea cols="40" rows="7" wicket:id="ProductDescription"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" wicket:id="submitForm" value="OK"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

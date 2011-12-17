@@ -15,7 +15,7 @@
         <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/ShopingCart"/>
 
         <property name="user" value="ShoppingCartOwner"/>
-        <property name="password" value="moon03dt12"/>
+        <property name="password" value="tck24m"/>
 
         <property name="initialPoolSize" value="5"/>
         <property name="minPoolSize" value="1"/>

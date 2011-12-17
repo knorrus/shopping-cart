@@ -23,6 +23,15 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
+    public void insertProduct (Product product) {
+        try{
+            productDao.insertProduct(product);
+        }
+        catch (SQLException ex){
+            logger.error("Error while trying to insert ne product", ex);
+        }
+    }
+
     public List loadAllProduct () {
         List products = null;
         try{
