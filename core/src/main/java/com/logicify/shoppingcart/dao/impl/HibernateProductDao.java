@@ -29,6 +29,7 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
         try {
             Session session = getSession();
             session.beginTransaction();
+            //session.update(product);
             session.save(product);
             session.getTransaction().commit();
         } catch (HibernateException ex) {

@@ -13,7 +13,7 @@
         </id>
         <property name="name" column="name" type="java.lang.String"/>
         <property name="description" column="description" type="java.lang.String"/>
-        <property name="price" column="price" type="java.math.BigDecimal"/>
+        <property name="price" column="price" type="java.math.BigDecimal" precision="4"/>
         <property name="date" column="date" type="java.util.Date"/>
 
         <set name="categories" schema="shopping_cart" table="product_to_category" lazy="false">

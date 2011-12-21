@@ -1,8 +1,8 @@
 .pageWrapper {
     position: absolute;
-    width: 1000px;
+    width: 1200px;
     left: 50%;
-    margin-left: -500px;
+    margin-left: -600px;
     padding: 10px;
 }
 
@@ -16,6 +16,20 @@
 
 .clear {
     clear: both;
+}
+
+.pageContentRightBig, .pageContentLeftBig {
+    width: 75%;
+    height: 100%;
+    position: inherit;
+}
+
+.pageContentRightBig{
+    float:right;
+}
+
+.pageContentLeftBig{
+    float:left;
 }
 
 .pageContentLeftMedium, .pageContentRightMedium {
@@ -37,8 +51,16 @@
     border: 2px solid red;
 }
 
-.insertProductForm input[type="text"] {
+form.insertProductForm table {
     width: 100%;
+}
+
+form.insertProductForm .LeftColumnName{
+    width: 130px;
+}
+
+form.insertProductForm input[type="text"] {
+    width: 50%;
     border: 2px solid #fa8072;
 
 }

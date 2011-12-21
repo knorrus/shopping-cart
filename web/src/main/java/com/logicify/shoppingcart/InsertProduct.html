@@ -5,8 +5,22 @@
 <head>
     <title>Product insert page</title>
     <link rel="stylesheet" href="css/AdminModule.css"/>
+
     <script type="text/javascript" language="javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/markitup/set.js"></script>
+    <script type="text/javascript" language="javascript" src="js/markitup/jquery.markitup.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/markitup/skin.css">
+    <link type="text/css" rel="stylesheet" href="css/markitup/style.css">
+    <script type="text/javascript" >
+       $(document).ready(function() {
+          $('.bbcode').markItUp(myBbcodeSettings);
+       });
+    </script>
 </head>
+
+
+
 
 <body>
     <div class="pageWrapper">
@@ -19,27 +33,30 @@
 
         <div class="pageContentBlockFullSize">
 
-            <div class="pageContentLeftMedium">
+            <div class="pageContentLeftBig">
                 <form class="insertProductForm"  wicket:id="form">
                     <table>
                         <tr>
-                            <td>Product name: </td>
+                            <td class="LeftColumnName">Product name: </td>
                             <td><input type="text" wicket:id="ProductName"></td>
                         </tr>
                         <tr>
-                            <td>Product price: </td>
+                            <td class="LeftColumnName">Product price: </td>
                             <td><input type="text" wicket:id="ProductPrice"></td>
                         </tr>
                         <tr>
-                            <td>Product description: </td>
-                            <td><textarea cols="40" rows="7" wicket:id="ProductDescription"></textarea></td>
-                        </tr>
-                        <tr>
+                            <td class="LeftColumnName">Product description:</td>
+                            <td>
+                                <textarea cols="40" rows="7" wicket:id="ProductDescription" class="markItUp bbcode"></textarea>
+                            </td>
+
                             <td><input type="submit" wicket:id="submitForm" value="OK"></td>
                         </tr>
                     </table>
                 </form>
             </div>
+
+
 
         </div>
     </div>
