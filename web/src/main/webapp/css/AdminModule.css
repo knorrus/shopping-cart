@@ -18,10 +18,10 @@
     clear: both;
 }
 
+
 .pageContentRightBig, .pageContentLeftBig {
     width: 75%;
     height: 100%;
-    position: inherit;
 }
 
 .pageContentRightBig{
@@ -32,10 +32,10 @@
     float:left;
 }
 
+
 .pageContentLeftMedium, .pageContentRightMedium {
     width: 50%;
     height: 100%;
-    position: inherit;
 }
 
 .pageContentRightMedium {
@@ -51,9 +51,8 @@
     border: 2px solid red;
 }
 
-form.insertProductForm table {
-    width: 100%;
-}
+
+
 
 form.insertProductForm .LeftColumnName{
     width: 130px;
@@ -64,3 +63,4 @@ form.insertProductForm input[type="text"] {
     border: 2px solid #fa8072;
 
 }
+
