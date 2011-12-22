@@ -7,16 +7,8 @@
     <link rel="stylesheet" href="css/AdminModule.css"/>
 
     <script type="text/javascript" language="javascript" src="js/jquery-1.6.4.js"></script>
-    <script type="text/javascript" language="javascript" src="js/markitup/set.js"></script>
-    <script type="text/javascript" language="javascript" src="js/markitup/jquery.markitup.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="css/markitup/skin.css">
-    <link type="text/css" rel="stylesheet" href="css/markitup/style.css">
-    <script type="text/javascript" >
-       $(document).ready(function() {
-          $('.bbcode').markItUp(myBbcodeSettings);
-       });
-    </script>
+
 </head>
 
 
@@ -49,7 +41,8 @@
                             <td>
                                 <textarea cols="40" rows="7" wicket:id="ProductDescription" class="markItUp bbcode"></textarea>
                             </td>
-
+                        </tr>
+                        <tr>
                             <td><input type="submit" wicket:id="submitForm" value="OK"></td>
                         </tr>
                     </table>
