@@ -6,6 +6,11 @@
     padding: 10px;
 }
 
+#header {
+    text-align: center;
+    border: 2px solid red;
+}
+
 .pageContentBlockFullSize {
     width: 100%;
     background-color: #f5f5f5;
@@ -18,41 +23,31 @@
     clear: both;
 }
 
-
 .pageContentRightBig, .pageContentLeftBig {
     width: 75%;
     height: 100%;
+    padding: 10px;
 }
-
-.pageContentRightBig{
-    float:right;
-}
-
-.pageContentLeftBig{
-    float:left;
-}
-
 
 .pageContentLeftMedium, .pageContentRightMedium {
     width: 50%;
     height: 100%;
+    padding: 10px;
 }
 
-.pageContentRightMedium {
-    float: right;
+.pageContentRightSmall,.pageContentLeftSmall {
+    width: 25%;
+    height: 100%;
+    padding: 10px;
 }
 
-.pageContentLeftMedium {
-    float: left;
+.pageContentRightBig, .pageContentRightMedium, .pageContentRightMedium{
+    float:right;
 }
 
-#header {
-    text-align: center;
-    border: 2px solid red;
+.pageContentLeftBig, .pageContentLeftMedium, .pageContentLeftSmall{
+    float:left;
 }
-
-
-
 
 form.insertProductForm .LeftColumnName{
     width: 130px;
