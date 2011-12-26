@@ -66,5 +66,11 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>ru.perm</groupId>
+            <artifactId>KefirBB</artifactId>
+
+        </dependency>
+
     </dependencies>
 </project>

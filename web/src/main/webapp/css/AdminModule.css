@@ -3,7 +3,6 @@
     width: 1200px;
     left: 50%;
     margin-left: -600px;
-    padding: 10px;
 }
 
 #header {
@@ -24,24 +23,24 @@
 }
 
 .pageContentRightBig, .pageContentLeftBig {
-    width: 75%;
-    height: 100%;
-    padding: 10px;
+    width: 73%;
+    height: 99%;
+    padding: 1%;
 }
 
 .pageContentLeftMedium, .pageContentRightMedium {
-    width: 50%;
-    height: 100%;
-    padding: 10px;
+    width: 48%;
+    height: 99%;
+    padding: 1%;
 }
 
 .pageContentRightSmall,.pageContentLeftSmall {
-    width: 25%;
-    height: 100%;
-    padding: 10px;
+    width: 23%;
+    height: 99%;
+    padding: 1%;
 }
 
-.pageContentRightBig, .pageContentRightMedium, .pageContentRightMedium{
+.pageContentRightBig, .pageContentRightMedium, .pageContentRightSmall{
     float:right;
 }
 

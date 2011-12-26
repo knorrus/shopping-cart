@@ -13,6 +13,9 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import ru.perm.kefir.bbcode.BBProcessorFactory;
+import ru.perm.kefir.bbcode.TextProcessor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +39,12 @@ public class ProductInfo extends WebPage {
             Long id = params.get("id").toLong();
             product = service.getProductById(id);
         }
+
+        TextProcessor processor = BBProcessorFactory.getInstance().create();
+        String formattedDescription = processor.process(product.getDescription());
+
         add(new Label("productName", product.getName()));
-        add(new Label("productDescription", product.getDescription()));
+        add(new Label("productDescription", formattedDescription).setEscapeModelStrings(false));
         add(new Label("productPrice", product.getPrice().toString()));
 
         ListView<Category> listview = new ListView<Category>("categoryList", this.getProductsModel(product)) {
