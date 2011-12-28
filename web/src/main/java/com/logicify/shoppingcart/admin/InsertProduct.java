@@ -1,5 +1,6 @@
-package com.logicify.shoppingcart;
+package com.logicify.shoppingcart.admin;
 
+import com.logicify.shoppingcart.Index;
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 import com.logicify.shoppingcart.service.CategoryService;
@@ -83,6 +84,14 @@ public class InsertProduct extends WebPage {
     private static class CategoryChecker implements Serializable{
         private Category category;
         private boolean checked;
+
+        public void setChecked(boolean checked){
+            this.checked = true;
+        }
+
+        public boolean getChecked(){
+            return this.checked;
+        }
 
         public CategoryChecker(Category category) {
             this.setCategory(category);

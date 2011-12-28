@@ -8,18 +8,19 @@
 </head>
 
 <body>
-    <div class="pageWrapper">
+<div class="pageWrapper">
 
-        <div id="header">
-            <h2>Category</h2>
-        </div>
+    <div id="header">
+        <h2>Category</h2>
+    </div>
 
-        <div class="clear"></div>
+    <div class="clear"></div>
 
-        <div class="pageContentBlockFullSize">
-
+    <div class="pageContentBlockFullSize">
+        <form wicket:id="updateCategoryForm">
             <div class="pageContentLeftMedium">
                 <h3 wicket:id="categoryName"></h3>
+
                 <p wicket:id="categoryDescription"></p>
             </div>
 
@@ -27,16 +28,15 @@
                 <h3>Products in category:</h3>
                 <ul>
                     <li wicket:id="productList">
-                        <a href="#" wicket:id="linkToProduct">
-                            <wicket:container wicket:id="linksText"/>
-                        </a>
+                        <span wicket:id="name">productName</span>
+                        <input wicket:id="check" type="checkbox"/>
                         <br/>
                     </li>
                 </ul>
             </div>
-
-        </div>
+        </form>
     </div>
+</div>
 </body>
 
 </html>

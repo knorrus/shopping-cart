@@ -1,4 +1,4 @@
-package com.logicify.shoppingcart;
+package com.logicify.shoppingcart.admin;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +15,6 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;

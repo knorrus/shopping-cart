@@ -7,7 +7,8 @@ package com.logicify.shoppingcart;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-import com.logicify.shoppingcart.domain.Category;
+import com.logicify.shoppingcart.admin.CategoryInfo;
+import com.logicify.shoppingcart.admin.ProductInfo;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 

@@ -75,4 +75,26 @@ public class Product implements Serializable{
         this.price = price;
     }
 
+    @Override
+    public int hashCode(){
+        return this.id.intValue();
+    }
+
+    @Override
+    public boolean equals (Object obj){
+        if (obj == this){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+        if (this.getClass() == obj.getClass()){
+            Product temp = (Product)obj;
+            if (this.id.equals(temp.getId())) {
+                return  true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.logicify.shoppingcart;
+package com.logicify.shoppingcart.admin;
 
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;

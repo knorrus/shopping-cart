@@ -1,5 +1,8 @@
 package com.logicify.shoppingcart;
 
+import com.logicify.shoppingcart.admin.InsertProduct;
+import com.logicify.shoppingcart.admin.ListOfExistingCategories;
+import com.logicify.shoppingcart.admin.ListOfExistingProducts;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
