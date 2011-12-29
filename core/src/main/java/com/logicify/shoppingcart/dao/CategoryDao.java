@@ -17,6 +17,8 @@ public interface CategoryDao {
 
     public void insertCategory(Category category) throws SQLException;
 
+    public void updateCategory (Category category) throws SQLException;
+
     public List loadAllCategories () throws SQLException;
 
     public Category getCategoryById (Long id) throws SQLException;

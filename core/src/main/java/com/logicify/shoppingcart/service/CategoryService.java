@@ -45,5 +45,14 @@ public class CategoryService {
         return category;
     }
 
+    public void updateCategory (Category category){
+        try{
+            categoryDao.updateCategory(category);
+        }
+        catch (SQLException ex){
+            logger.error("Can't update category "+category.getName(),ex);
+        }
+    }
+
 
 }

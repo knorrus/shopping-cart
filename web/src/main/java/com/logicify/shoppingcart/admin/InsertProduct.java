@@ -67,15 +67,14 @@ public class InsertProduct extends WebPage {
                 Set<Category> categoriesSet = new HashSet<Category>();
                 ListIterator<CategoryChecker> categoryCheckerIterator = categoryCheckerList.listIterator();
                 while (categoryCheckerIterator.hasNext()) {
-                    if (categoryCheckerIterator.next().isChecked()) {
-                        categoriesSet.add(categoryCheckerIterator.next().getCategory());
+                    CategoryChecker next = categoryCheckerIterator.next();
+                    if (next.isChecked()) {
+                        categoriesSet.add(next.getCategory());
                     }
                 }
-
                 product.setCategories(categoriesSet);
                 product.setDate(new Date());
                 productService.insertProduct(product);
-
                 setResponsePage(Index.class);
             }
         });

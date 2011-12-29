@@ -1,11 +1,13 @@
 package com.logicify.shoppingcart.admin;
 
+import com.logicify.shoppingcart.Index;
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 import com.logicify.shoppingcart.service.CategoryService;
 import com.logicify.shoppingcart.service.ProductService;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -35,6 +37,8 @@ public class CategoryInfo extends WebPage {
     @SpringBean(required = true)
     private ProductService productService;
 
+    private Long id;
+    private ListView<ProductChecker> listView;
 
     /**
      * ProductChecker - used for generate list of products which present in category
@@ -42,7 +46,7 @@ public class CategoryInfo extends WebPage {
      */
     private static class ProductChecker implements Serializable {
         private Product product;
-        private boolean checked;
+        private Boolean checked;
 
         public ProductChecker(Product product) {
             this.setProduct(product);
@@ -50,7 +54,7 @@ public class CategoryInfo extends WebPage {
         }
 
         public void setChecked(boolean checked){
-            this.checked = true;
+            this.checked = checked;
         }
 
         public boolean getChecked(){
@@ -88,7 +92,7 @@ public class CategoryInfo extends WebPage {
         super(params);
         Category category = null;
         if (params.getNamedKeys().contains("id")) {
-            Long id = params.get("id").toLong();
+            id = params.get("id").toLong();
             category = categoryService.getCategoryById(id);
         }
         else {
@@ -101,6 +105,7 @@ public class CategoryInfo extends WebPage {
         updateCategoryForm.add(new Label("categoryName", category.getName()));
         updateCategoryForm.add(new Label("categoryDescription", category.getDescription()));
 
+        
         List<Product> allProducts = productService.loadAllProduct();
         Set<Product>  categoryProducts = category.getProducts();
         List<ProductChecker> allProductsCheckers = new ArrayList<ProductChecker>();
@@ -116,16 +121,36 @@ public class CategoryInfo extends WebPage {
             }
             allProductsCheckers.add(tempProductChecker);
         }
-        ListView<ProductChecker> listview = new ListView<ProductChecker>("productList", allProductsCheckers) {
+            listView = new ListView<ProductChecker>("productList", allProductsCheckers) {
             protected void populateItem(ListItem<ProductChecker> item) {
                 ProductChecker productWrapper = item.getModelObject();
                 item.add(new Label("name", productWrapper.getProduct().getName()));
-                CheckBox checkBox = new CheckBox("check", new PropertyModel(productWrapper, "checked"));
+                CheckBox checkBox = new CheckBox("check", new PropertyModel<Boolean>(productWrapper, "checked"));
                 item.add(checkBox);
             }
         };
-        listview.setReuseItems(true);
-        updateCategoryForm.add(listview);
+
+        updateCategoryForm.add(listView);
+
+        updateCategoryForm.add(new Button("submitForm") {
+            @Override
+            public void onSubmit() {
+                Set<Product> productsSet = new HashSet<Product>();
+                List list = listView.getList();
+                ListIterator<ProductChecker> productCheckerIterator = list.listIterator();
+                while (productCheckerIterator.hasNext()) {
+                    ProductChecker next = productCheckerIterator.next();
+                    if (next.isChecked()) {
+                        productsSet.add(next.getProduct());
+                    }
+                }
+                Category category = categoryService.getCategoryById(id);
+                category.setProducts(productsSet);
+                categoryService.updateCategory(category);
+                setResponsePage(Index.class);
+            }
+        });
+
     }
 
 }

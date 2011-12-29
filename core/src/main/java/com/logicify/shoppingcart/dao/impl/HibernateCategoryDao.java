@@ -32,12 +32,24 @@ public class HibernateCategoryDao extends HibernateDaoSupport implements Categor
         }
     }
 
+    public void updateCategory(Category category){
+        try{
+            Session session = getSession();
+            session.beginTransaction();
+            session.merge(category);
+            session.getTransaction().commit();
+        }
+        catch (HibernateException ex){
+            logger.error("Error while updating category", ex);
+        }
+    }
+
     public List loadAllCategories () {
         List categories = null;
         try {
             Session session = getSession();
             session.beginTransaction();
-            categories = session.createQuery("from Category ").list();
+            categories = session.createQuery("from Category").list();
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while fetching all categories ", ex);
