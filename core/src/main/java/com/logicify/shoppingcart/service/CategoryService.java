@@ -54,5 +54,14 @@ public class CategoryService {
         }
     }
 
+    public void insertCategory (Category category){
+        try{
+            categoryDao.insertCategory(category);
+        }
+        catch (SQLException ex){
+                logger.error("Error while trying to insert new category", ex);
+        }
+    }
+
 
 }

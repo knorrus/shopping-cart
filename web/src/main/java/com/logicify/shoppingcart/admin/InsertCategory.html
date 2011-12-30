@@ -3,7 +3,7 @@
       xml:lang="en"
       lang="en">
 <head>
-    <title>Product insert page</title>
+    <title>Category insert page</title>
     <link rel="stylesheet" href="css/AdminModule.css"/>
 
     <script type="text/javascript" language="javascript" src="js/jquery-1.6.4.js"></script>
@@ -32,47 +32,29 @@
 <div class="pageWrapper">
 
     <div id="header">
-        <h2>Product Insert</h2>
+        <h2>Category Insert</h2>
     </div>
 
     <div class="clear"></div>
 
     <div class="pageContentBlockFullSize">
-
-                <div class="pageContentLeftMedium feedback" wicket:id="feedback"></div>
-
         <form class="insertProductForm" wicket:id="form">
             <div class="pageContentLeftBig">
                 <table>
                     <tr>
-                        <td class="LeftColumnName">Product name:</td>
-                        <td><input type="text" wicket:id="ProductName"></td>
+                        <td class="LeftColumnName">Category name:</td>
+                        <td><input type="text" wicket:id="CategoryName"></td>
                     </tr>
                     <tr>
-                        <td class="LeftColumnName">Product price:</td>
-                        <td><input type="text" wicket:id="ProductPrice"></td>
-                    </tr>
-                    <tr>
-                        <td class="LeftColumnName">Product description:</td>
+                        <td class="LeftColumnName">Category description:</td>
                         <td>
-                            <textarea cols="80" rows="15" wicket:id="ProductDescription" class="bbcode"></textarea>
+                            <textarea cols="80" rows="15" wicket:id="CategoryDescription" class="bbcode"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td><input type="submit" wicket:id="submitForm" value="OK"></td>
                     </tr>
                 </table>
-            </div>
-
-            <div class="pageContentRightSmall">
-                <p>Add category</p>
-                <ul>
-                    <li wicket:id="categoryList">
-                        <span wicket:id="name">categoryName</span>
-                        <input wicket:id="check" type="checkbox"/>
-                        <br/>
-                    </li>
-                </ul>
             </div>
         </form>
     </div>

@@ -12,7 +12,7 @@ import java.util.Set;
  * Time: 10:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Category implements Serializable{
+public class Category implements Serializable {
     private Long id;
     private String name;
     private String description;
@@ -42,8 +42,25 @@ public class Category implements Serializable{
         return date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category temp = (Category) o;
+        if (this.id.equals(temp.getId())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.intValue();
+    }
+
     public void setDate(Date date) {
         this.date = date;
+
     }
 
     public String getName() {

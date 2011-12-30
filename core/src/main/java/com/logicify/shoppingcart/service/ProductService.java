@@ -23,34 +23,39 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
-    public void insertProduct (Product product) {
-        try{
+    public void insertProduct(Product product) {
+        try {
             productDao.insertProduct(product);
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             logger.error("Error while trying to insert ne product", ex);
         }
     }
 
-    public List loadAllProduct () {
+    public List loadAllProduct() {
         List products = null;
-        try{
+        try {
             products = productDao.loadAllProducts();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             logger.error("Error", ex);
         }
         return products;
     }
 
-    public Product getProductById (Long id) {
+    public Product getProductById(Long id) {
         Product product = null;
-        try{
+        try {
             product = productDao.getProductById(id);
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             logger.error("Error", ex);
         }
         return product;
+    }
+
+    public void updateProduct(Product product) {
+        try {
+            productDao.updateProduct(product);
+        } catch (SQLException ex) {
+            logger.error("Error", ex);
+        }
     }
 }

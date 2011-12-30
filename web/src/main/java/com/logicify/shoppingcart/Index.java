@@ -16,31 +16,13 @@ import org.apache.wicket.markup.html.link.Link;
  */
 public class Index extends WebPage {
     public Index() {
-        Link productList = new Link("linkToProductsListPage") {
+        Link adminModule = new Link("AdminModule") {
             @Override
             public void onClick() {
-                setResponsePage(new ListOfExistingProducts());
+                setResponsePage(new com.logicify.shoppingcart.admin.Index());
             }
         };
-        productList.add(new Label("linksText", "List of Existing products"));
-        add(productList);
-
-        Link categoryList = new Link("linkToCategoriesListPage"){
-            @Override
-            public void onClick() {
-                setResponsePage(new ListOfExistingCategories());
-            }
-        };
-        categoryList.add(new Label("linksText", "List of Existing categories"));
-        add(categoryList);
-
-        Link insertProduct = new Link("linkToInsertProductPage") {
-            @Override
-            public void onClick() {
-                setResponsePage(new InsertProduct());
-            }
-        };
-        insertProduct.add(new Label("linksText", "Insert new product"));
-        add(insertProduct);
+        adminModule.add(new Label("linksText", "Administrative interface"));
+        add(adminModule);
     }
 }

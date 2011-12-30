@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -40,10 +41,12 @@ public class InsertProduct extends WebPage {
 
         List<Category> categories = this.categoryService.loadAllCategories();
         ListIterator<Category> categoryListIterator = categories.listIterator();
-
         while (categoryListIterator.hasNext()) {
             this.categoryCheckerList.add(new CategoryChecker(categoryListIterator.next()));
         }
+
+        add(new FeedbackPanel("feedback"));
+
         ListView<CategoryChecker> listView = new ListView<CategoryChecker>("categoryList", this.categoryCheckerList) {
             protected void populateItem(ListItem<CategoryChecker> item) {
                 CategoryChecker categoryWrapper = item.getModelObject();
@@ -57,9 +60,9 @@ public class InsertProduct extends WebPage {
         add(form);
         form.setOutputMarkupId(true);
         form.add(listView);
-        form.add(new TextField("ProductName", new PropertyModel<Product>(this.product, "name")));
-        form.add(new TextField("ProductPrice", new PropertyModel<Product>(this.product, "price")));
-        form.add(new TextArea("ProductDescription", new PropertyModel<Product>(this.product, "description")));
+        form.add(new TextField("ProductName", new PropertyModel<Product>(this.product, "name")).setRequired(true));
+        form.add(new TextField("ProductPrice", new PropertyModel<Product>(this.product, "price")).setRequired(true));
+        form.add(new TextArea("ProductDescription", new PropertyModel<Product>(this.product, "description")).setRequired(true));
         form.add(new Button("submitForm") {
             @Override
             public void onSubmit() {

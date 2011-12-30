@@ -17,25 +17,25 @@
     <div class="clear"></div>
 
     <div class="pageContentBlockFullSize">
-        <div class="pageContentLeftMedium">
-            <h3 wicket:id="productName"></h3>
+        <form wicket:id="updateProductForm">
+            <div class="pageContentLeftMedium">
+                <h3 wicket:id="productName"></h3>
+                <p wicket:id="productDescription"></p>
+                <p wicket:id="productPrice"></p>
+            </div>
 
-            <p wicket:id="productDescription"></p>
-
-            <p wicket:id="productPrice"></p>
-        </div>
-
-        <div class="pageContentRightMedium">
-            <h3>Product categories:</h3>
-            <ul>
-                <li wicket:id="categoryList">
-                    <a href="ProductInfo.html#" wicket:id="linkToCategory">
-                        <wicket:container wicket:id="linksText"/>
-                    </a>
-                    <br/>
-                </li>
-            </ul>
-        </div>
+            <div class="pageContentRightMedium">
+                <h3>Product categories:</h3>
+                <ul>
+                    <li wicket:id="categoryList">
+                        <span wicket:id="name">productName</span>
+                        <input wicket:id="check" type="checkbox"/>
+                        <br/>
+                    </li>
+                </ul>
+            </div>
+            <input type="submit" wicket:id="submitForm" value="OK">
+        </form>
     </div>
 </div>
 </body>

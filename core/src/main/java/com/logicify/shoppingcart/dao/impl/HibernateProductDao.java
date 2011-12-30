@@ -29,11 +29,22 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
         try {
             Session session = getSession();
             session.beginTransaction();
-            //session.update(product);
             session.save(product);
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while insertion product", ex);
+        }
+    }
+
+    public void updateProduct(Product product){
+        try {
+            Session session = getSession();
+            session.beginTransaction();
+            session.merge(product);
+            session.getTransaction().commit();
+        }
+        catch (HibernateException ex){
+            logger.error("Error while trying to update product", ex);
         }
     }
 

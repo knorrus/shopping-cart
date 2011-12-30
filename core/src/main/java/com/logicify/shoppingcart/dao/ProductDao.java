@@ -20,4 +20,6 @@ public interface ProductDao {
     public Product getProductById(Long id) throws SQLException;
 
     public List loadAllProducts() throws SQLException;
+
+    public void updateProduct(Product product) throws SQLException;
 }

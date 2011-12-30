@@ -17,6 +17,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import ru.perm.kefir.bbcode.BBProcessorFactory;
+import ru.perm.kefir.bbcode.TextProcessor;
 
 import java.io.Serializable;
 import java.util.*;
@@ -103,7 +105,10 @@ public class CategoryInfo extends WebPage {
 
         add(updateCategoryForm);
         updateCategoryForm.add(new Label("categoryName", category.getName()));
-        updateCategoryForm.add(new Label("categoryDescription", category.getDescription()));
+
+        TextProcessor processor = BBProcessorFactory.getInstance().create();
+        String formattedDescription = processor.process(category.getDescription());
+        updateCategoryForm.add(new Label("categoryDescription", formattedDescription).setEscapeModelStrings(false));
 
         
         List<Product> allProducts = productService.loadAllProduct();
