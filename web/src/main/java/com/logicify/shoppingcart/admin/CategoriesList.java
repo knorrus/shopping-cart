@@ -18,12 +18,12 @@ import java.util.List;
  * Time: 5:42 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ListOfExistingCategories extends WebPage{
+public class CategoriesList extends WebPage{
 
     @SpringBean(required = true)
     private CategoryService service;
 
-    public ListOfExistingCategories() {
+    public CategoriesList() {
         List categories = this.service.loadAllCategories();
         ListView<Category> listview = new ListView<Category>("categoryList", categories) {
             protected void populateItem(ListItem<Category> item) {

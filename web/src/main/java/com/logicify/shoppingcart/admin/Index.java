@@ -1,5 +1,6 @@
 package com.logicify.shoppingcart.admin;
 
+import com.logicify.shoppingcart.domain.Product;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -16,7 +17,7 @@ public class Index extends WebPage {
         Link productList = new Link("linkToProductsListPage") {
             @Override
             public void onClick() {
-                setResponsePage(new ListOfExistingProducts());
+                setResponsePage(new ProductsList());
             }
         };
         productList.add(new Label("linksText", "List of Existing products"));
@@ -25,7 +26,7 @@ public class Index extends WebPage {
         Link categoryList = new Link("linkToCategoriesListPage"){
             @Override
             public void onClick() {
-                setResponsePage(new ListOfExistingCategories());
+                setResponsePage(new CategoriesList());
             }
         };
         categoryList.add(new Label("linksText", "List of Existing categories"));
@@ -34,7 +35,7 @@ public class Index extends WebPage {
         Link insertProduct = new Link("linkToInsertProductPage") {
             @Override
             public void onClick() {
-                setResponsePage(new InsertProduct());
+                setResponsePage(new ProductInsert());
             }
         };
         insertProduct.add(new Label("linksText", "Insert new product"));
@@ -43,10 +44,19 @@ public class Index extends WebPage {
         Link insertCategory = new Link("linkToInsertCategoryPage") {
             @Override
             public void onClick() {
-                setResponsePage(new InsertCategory());
+                setResponsePage(new CategoryInsert());
             }
         };
         insertCategory.add(new Label("linksText", "Insert new Category"));
         add(insertCategory);
+
+        Link findProduct =new Link("linkToFindProductPage") {
+            @Override
+            public void onClick() {
+                setResponsePage(new ProductSearch());
+            }
+        };
+        findProduct.add(new Label("linksText", "Find product"));
+        add(findProduct);
     }
 }

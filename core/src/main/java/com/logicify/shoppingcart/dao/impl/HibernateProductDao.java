@@ -4,9 +4,12 @@ import com.logicify.shoppingcart.dao.ProductDao;
 import com.logicify.shoppingcart.domain.Product;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -69,6 +72,19 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while fetching all products ", ex);
+        }
+        return products;
+    }
+
+    public List findProductsByMask (String mask){
+        List products = null;
+        try {
+            Session session = getSession();
+            session.beginTransaction();
+            products = session.createCriteria(Product.class).add(Restrictions.like("name", mask)).list();
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            logger.error("Error while searching product ", ex);
         }
         return products;
     }

@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -41,12 +42,15 @@ public class ProductInfo extends WebPage {
     private Product product;
     private List<CategoryChecker> allCategoriesCheckers;
 
+    private Form updateProductForm;
+    private FeedbackPanel formFeedbackPanel;
+
     private static class CategoryChecker implements Serializable {
         private Category category;
         private boolean checked;
 
         public void setChecked(boolean checked) {
-            this.checked = true;
+            this.checked = checked;
         }
 
         public boolean getChecked() {
@@ -79,7 +83,6 @@ public class ProductInfo extends WebPage {
         }
     }
 
-
     public ProductInfo(PageParameters params) {
         super(params);
         product = null;
@@ -89,14 +92,16 @@ public class ProductInfo extends WebPage {
         } else {
             //TODO: add link to error page;
         }
+        formFeedbackPanel = new FeedbackPanel("feedback");
+        add(formFeedbackPanel);
 
-        Form updateProductForm = new Form("updateProductForm");
+        updateProductForm = new Form("updateProductForm");
         add(updateProductForm);
 
-        TextProcessor processor = BBProcessorFactory.getInstance().create();
-        String formattedDescription = processor.process(product.getDescription());
 
         updateProductForm.add(new Label("productName", product.getName()));
+        TextProcessor processor = BBProcessorFactory.getInstance().create();
+        String formattedDescription = processor.process(product.getDescription());
         updateProductForm.add(new Label("productDescription", formattedDescription).setEscapeModelStrings(false));
         updateProductForm.add(new Label("productPrice", product.getPrice().toString()));
 
@@ -138,6 +143,10 @@ public class ProductInfo extends WebPage {
                     if (temp.isChecked()) {
                         categorySet.add(temp.getCategory());
                     }
+                }
+                if (categorySet.isEmpty()) {
+                    formFeedbackPanel.error("The product must contain at least one category");
+                    return;
                 }
                 Product product = productService.getProductById(id);
                 product.setCategories(categorySet);

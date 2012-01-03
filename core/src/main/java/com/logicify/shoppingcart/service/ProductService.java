@@ -58,4 +58,16 @@ public class ProductService {
             logger.error("Error", ex);
         }
     }
+
+    public List findProductsByName (String mask){
+        mask = "%" + mask + "%";
+        List products = null;
+        try{
+            products = productDao.findProductsByMask(mask);
+        }
+        catch (SQLException ex){
+            logger.error("Error", ex);
+        }
+        return products;
+    }
 }

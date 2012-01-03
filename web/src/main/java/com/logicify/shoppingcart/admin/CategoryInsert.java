@@ -16,14 +16,14 @@ import java.util.*;
  * Time: 2:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public class InsertCategory extends WebPage{
+public class CategoryInsert extends WebPage{
 
     @SpringBean(required = true)
     private CategoryService categoryService;
 
     private Category category;
 
-    public InsertCategory() {
+    public CategoryInsert() {
         this.category = new Category();
         Form form = new Form("form");
         add(form);

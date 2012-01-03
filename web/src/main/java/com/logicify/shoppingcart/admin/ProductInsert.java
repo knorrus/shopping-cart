@@ -24,7 +24,7 @@ import java.util.*;
  * Time: 1:30 PM
  * To change this template use File | Settings | File Templates.
  */
-public class InsertProduct extends WebPage {
+public class ProductInsert extends WebPage {
 
 
     @SpringBean(required = true)
@@ -35,7 +35,7 @@ public class InsertProduct extends WebPage {
     private Product product;
     private List<CategoryChecker> categoryCheckerList;
 
-    public InsertProduct() {
+    public ProductInsert() {
         this.product = new Product();
         this.categoryCheckerList = new ArrayList<CategoryChecker>();
 
@@ -66,7 +66,6 @@ public class InsertProduct extends WebPage {
         form.add(new Button("submitForm") {
             @Override
             public void onSubmit() {
-
                 Set<Category> categoriesSet = new HashSet<Category>();
                 ListIterator<CategoryChecker> categoryCheckerIterator = categoryCheckerList.listIterator();
                 while (categoryCheckerIterator.hasNext()) {

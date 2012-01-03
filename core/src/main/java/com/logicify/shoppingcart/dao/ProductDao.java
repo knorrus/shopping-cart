@@ -22,4 +22,6 @@ public interface ProductDao {
     public List loadAllProducts() throws SQLException;
 
     public void updateProduct(Product product) throws SQLException;
+
+    public List findProductsByMask (String mask) throws SQLException;
 }

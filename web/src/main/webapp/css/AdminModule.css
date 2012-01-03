@@ -24,19 +24,16 @@
 }
 
 .pageContentRightBig, .pageContentLeftBig {
-    position: inherit;
     width: 73%;
     padding: 1%;
 }
 
 .pageContentLeftMedium, .pageContentRightMedium {
-    position: inherit;
     width: 48%;
     padding: 1%;
 }
 
 .pageContentRightSmall,.pageContentLeftSmall {
-    position: inherit;
     width: 23%;
     padding: 1%;
 }

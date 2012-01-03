@@ -19,12 +19,12 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;
 
-public class ListOfExistingProducts extends WebPage {
+public class ProductsList extends WebPage {
 
     @SpringBean(required = true)
     private ProductService service;
 
-    public ListOfExistingProducts() {
+    public ProductsList() {
         List products = this.service.loadAllProduct();
         ListView<Product> listview = new ListView<Product>("productList", products) {
             protected void populateItem(ListItem<Product> item) {
