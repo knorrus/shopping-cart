@@ -1,4 +1,4 @@
-package com.logicify.shoppingcart.admin;
+package com.logicify.shoppingcart.user;
 
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.service.CategoryService;
@@ -21,7 +21,7 @@ public class CategoriesList extends WebPage{
         ListView<Category> listview = new ListView<Category>("categoryList", categories) {
             protected void populateItem(ListItem<Category> item) {
                 Category category = item.getModelObject();
-                BookmarkablePageLink<Category> linkToCategory = new BookmarkablePageLink<Category>("linkToCategory", CategoryInfo.class);
+                BookmarkablePageLink<Category> linkToCategory = new BookmarkablePageLink<Category>("linkToCategory", CategoryDetails.class);
                 linkToCategory.getPageParameters().set("id", category.getId());
                 linkToCategory.add(new Label("linksText", category.getName()));
                 item.add(linkToCategory);

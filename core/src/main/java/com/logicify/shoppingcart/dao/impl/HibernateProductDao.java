@@ -68,7 +68,7 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
         try {
             Session session = getSession();
             session.beginTransaction();
-            products = session.createQuery("from Product").list();
+            products = session.createCriteria(Product.class).list();
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while fetching all products ", ex);
@@ -81,7 +81,7 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
         try {
             Session session = getSession();
             session.beginTransaction();
-            products = session.createCriteria(Product.class).add(Restrictions.like("name", mask)).list();
+            products = session.createCriteria(Product.class).add(Restrictions.ilike("name", mask)).list();
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while searching product ", ex);

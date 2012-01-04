@@ -11,21 +11,21 @@
     <div class="pageWrapper">
 
         <div id="header">
-            <h2>Main page</h2>
+            <h2>Hello! This is user interface for product/category module for online shopping cart</h2>
         </div>
 
         <div class="clear"></div>
 
         <div class="pageContentBlockFullSize">
-            <a href="Index.html#" wicket:id="linkToProductsListPage">
-                <wicket:container wicket:id="linksText"/>
-            </a>
-            <br/>
-            <a href="Index.html#" wicket:id="linkToCategoriesListPage">
-                <wicket:container wicket:id="linksText"/>
-            </a>
-            <br/>
+            <ul>
+                <li wicket:id ="categoryList">
+                    <a href="CategoriesList.html#" wicket:id="linkToCategory">
+                        <wicket:container wicket:id="linksText"/>
+                    </a>
+                    <br/>
+                </li>
+            </ul>
         </div>
-    </div>
+     </div>
 </body>
 </html>

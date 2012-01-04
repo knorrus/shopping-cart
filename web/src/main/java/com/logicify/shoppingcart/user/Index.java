@@ -1,11 +1,29 @@
 package com.logicify.shoppingcart.user;
 
-/**
- * Created by IntelliJ IDEA.
- * User: knorr
- * Date: 1/3/12
- * Time: 10:22 AM
- * To change this template use File | Settings | File Templates.
- */
-public class Index {
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
+
+public class Index extends WebPage {
+    public Index() {
+
+        Link productList = new Link("linkToProductsListPage") {
+            @Override
+            public void onClick() {
+                setResponsePage(new ProductsList());
+            }
+        };
+        productList.add(new Label("linksText", "List of Existing products"));
+        add(productList);
+
+
+        Link categoryList = new Link("linkToCategoriesListPage"){
+            @Override
+            public void onClick() {
+                setResponsePage(new CategoriesList());
+            }
+        };
+        categoryList.add(new Label("linksText", "List of Existing categories"));
+        add(categoryList);
+    }
 }

@@ -21,5 +21,15 @@ public class Index extends WebPage {
         };
         adminModule.add(new Label("linksText", "Administrative interface"));
         add(adminModule);
+
+        Link userModule = new Link("UserModule") {
+            @Override
+            public void onClick() {
+                setResponsePage(new com.logicify.shoppingcart.user.Index());
+            }
+        };
+        userModule.add(new Label("linksText", "User interface"));
+        add(userModule);
+
     }
 }

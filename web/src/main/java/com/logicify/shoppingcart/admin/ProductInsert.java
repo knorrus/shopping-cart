@@ -18,14 +18,9 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
- * User: knorr
- * Date: 12/17/11
- * Time: 1:30 PM
- * To change this template use File | Settings | File Templates.
+ * Insert product page
  */
 public class ProductInsert extends WebPage {
-
 
     @SpringBean(required = true)
     private ProductService productService;
@@ -35,35 +30,28 @@ public class ProductInsert extends WebPage {
     private Product product;
     private List<CategoryChecker> categoryCheckerList;
 
-    public ProductInsert() {
-        this.product = new Product();
-        this.categoryCheckerList = new ArrayList<CategoryChecker>();
+    private FeedbackPanel insertProductFeedbackPanel;
+    private Form insertProductForm;
+    private ListView<CategoryChecker> relatedCategoriesList;
 
-        List<Category> categories = this.categoryService.loadAllCategories();
-        ListIterator<Category> categoryListIterator = categories.listIterator();
-        while (categoryListIterator.hasNext()) {
-            this.categoryCheckerList.add(new CategoryChecker(categoryListIterator.next()));
-        }
-
-        add(new FeedbackPanel("feedback"));
-
-        ListView<CategoryChecker> listView = new ListView<CategoryChecker>("categoryList", this.categoryCheckerList) {
-            protected void populateItem(ListItem<CategoryChecker> item) {
-                CategoryChecker categoryWrapper = item.getModelObject();
-                item.add(new Label("name", categoryWrapper.getCategory().getName()));
-                item.add(new CheckBox("check", new PropertyModel(categoryWrapper, "checked")));
-            }
-        };
-        listView.setReuseItems(true);
-
-        Form form = new Form("form");
-        add(form);
-        form.setOutputMarkupId(true);
-        form.add(listView);
-        form.add(new TextField("ProductName", new PropertyModel<Product>(this.product, "name")).setRequired(true));
-        form.add(new TextField("ProductPrice", new PropertyModel<Product>(this.product, "price")).setRequired(true));
-        form.add(new TextArea("ProductDescription", new PropertyModel<Product>(this.product, "description")).setRequired(true));
-        form.add(new Button("submitForm") {
+    /**
+     * Create product insert form component and save him to insertProductForm class member
+     * Product insert form contain:
+     * required TextField product name
+     * required TextField product price
+     * and TextArea with product description witch also required
+     * NOTE: that to fill text area we are using WYSIWIG editor that's  why in text area presents bb-tags
+     */
+    public void createInsertProductForm() {
+        insertProductForm = new Form("form");
+        insertProductForm.setOutputMarkupId(true);
+        createCategoriesList();
+        insertProductForm.add(relatedCategoriesList);
+        insertProductForm.add(new RequiredTextField("ProductName", new PropertyModel<Product>(this.product, "name")));
+        insertProductForm.add(new RequiredTextField("ProductPrice", new PropertyModel<Product>(this.product, "price")));
+        insertProductForm.add(new TextArea("ProductDescription", new PropertyModel<Product>(this.product, "description")));
+        insertProductForm.add(new RequiredTextField("ProductTags"));
+        insertProductForm.add(new Button("submitForm") {
             @Override
             public void onSubmit() {
                 Set<Category> categoriesSet = new HashSet<Category>();
@@ -82,6 +70,41 @@ public class ProductInsert extends WebPage {
         });
     }
 
+    /**
+     * Create list of existing categories component and save it to the relatedCategoriesList class member
+     * list consist of a checkboxes, and to represent the category relation we are using CategoryChecker class
+     */
+    public void createCategoriesList(){
+        List<Category> categories = this.categoryService.loadAllCategories();
+        ListIterator<Category> categoryListIterator = categories.listIterator();
+        while (categoryListIterator.hasNext()) {
+            this.categoryCheckerList.add(new CategoryChecker(categoryListIterator.next()));
+        }
+        relatedCategoriesList = new ListView<CategoryChecker>("categoryList", this.categoryCheckerList) {
+            protected void populateItem(ListItem<CategoryChecker> item) {
+                CategoryChecker categoryWrapper = item.getModelObject();
+                item.add(new Label("name", categoryWrapper.getCategory().getName()));
+                item.add(new CheckBox("check", new PropertyModel(categoryWrapper, "checked")));
+            }
+        };
+        relatedCategoriesList.setReuseItems(true);
+    }
+
+    public ProductInsert() {
+        this.product = new Product();
+        this.categoryCheckerList = new ArrayList<CategoryChecker>();
+        this.insertProductFeedbackPanel = new FeedbackPanel("feedback");
+
+        createInsertProductForm();
+
+        add(insertProductFeedbackPanel);
+        add(insertProductForm);
+    }
+
+    /**
+     * CategoryChecker class need for:
+     * creating the list of the checkboxes witch represent all existing categories
+     */
     private static class CategoryChecker implements Serializable{
         private Category category;
         private boolean checked;

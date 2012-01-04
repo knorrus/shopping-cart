@@ -16,13 +16,18 @@
         <property name="price" column="price" type="java.math.BigDecimal" precision="4"/>
         <property name="date" column="date" type="java.util.Date"/>
 
-        <set name="categories" schema="shopping_cart" table="product_to_category" lazy="false">
+        <set name="keywords" schema="shopping_cart" table="tag" lazy="false">
+            <key column="product_id"/>
+            <element type="java.lang.String" column="tag"/>
+        </set>
+
+        <set name="categories" schema="shopping_cart" table="product_to_category" lazy="true">
             <key column="product_id"/>
             <many-to-many column="category_id" class="com.logicify.shoppingcart.domain.Category"/>
         </set>
 
-    </class>
 
+    </class>
 
     <class name="Category" schema="shopping_cart" table="category">
         <id name="id" column="id_category" type="java.lang.Long">

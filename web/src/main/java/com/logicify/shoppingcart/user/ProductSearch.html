@@ -3,7 +3,7 @@
       xml:lang="en"
       lang="en">
 <head>
-    <title>User page</title>
+    <title>User module</title>
     <link rel="stylesheet" href="css/AdminModule.css">
 
 </head>
@@ -11,21 +11,18 @@
     <div class="pageWrapper">
 
         <div id="header">
-            <h2>Main page</h2>
+            <h2>Hello! This is user interface for product/category module for online shopping cart</h2>
         </div>
 
         <div class="clear"></div>
 
         <div class="pageContentBlockFullSize">
-            <a href="Index.html#" wicket:id="linkToProductsListPage">
-                <wicket:container wicket:id="linksText"/>
-            </a>
-            <br/>
-            <a href="Index.html#" wicket:id="linkToCategoriesListPage">
-                <wicket:container wicket:id="linksText"/>
-            </a>
-            <br/>
+            <div class="pageContentLeftMedium">
+                <form wicket:id="searchForm">
+                    <input type="text" wicket:id="keywordPattern">
+                </form>
+            </div>
         </div>
-    </div>
+     </div>
 </body>
 </html>

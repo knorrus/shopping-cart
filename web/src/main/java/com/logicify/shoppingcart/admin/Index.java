@@ -1,17 +1,9 @@
 package com.logicify.shoppingcart.admin;
 
-import com.logicify.shoppingcart.domain.Product;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 
-/**
- * Created by IntelliJ IDEA.
- * User: knorr
- * Date: 12/30/11
- * Time: 2:26 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Index extends WebPage {
     public Index() {
         Link productList = new Link("linkToProductsListPage") {
