@@ -11,15 +11,16 @@ import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-
+import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.validation.validator.PatternValidator;
+import org.apache.wicket.validation.validator.StringValidator;
+import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Insert product page
- */
 public class ProductInsert extends WebPage {
 
     @SpringBean(required = true)
@@ -27,93 +28,124 @@ public class ProductInsert extends WebPage {
     @SpringBean(required = true)
     private CategoryService categoryService;
 
-    private Product product;
     private List<CategoryChecker> categoryCheckerList;
 
-    private FeedbackPanel insertProductFeedbackPanel;
-    private Form insertProductForm;
-    private ListView<CategoryChecker> relatedCategoriesList;
-
-    /**
-     * Create product insert form component and save him to insertProductForm class member
-     * Product insert form contain:
-     * required TextField product name
-     * required TextField product price
-     * and TextArea with product description witch also required
-     * NOTE: that to fill text area we are using WYSIWIG editor that's  why in text area presents bb-tags
-     */
-    public void createInsertProductForm() {
-        insertProductForm = new Form("form");
-        insertProductForm.setOutputMarkupId(true);
-        createCategoriesList();
-        insertProductForm.add(relatedCategoriesList);
-        insertProductForm.add(new RequiredTextField("ProductName", new PropertyModel<Product>(this.product, "name")));
-        insertProductForm.add(new RequiredTextField("ProductPrice", new PropertyModel<Product>(this.product, "price")));
-        insertProductForm.add(new TextArea("ProductDescription", new PropertyModel<Product>(this.product, "description")));
-        insertProductForm.add(new RequiredTextField("ProductTags"));
-        insertProductForm.add(new Button("submitForm") {
-            @Override
-            public void onSubmit() {
-                Set<Category> categoriesSet = new HashSet<Category>();
-                ListIterator<CategoryChecker> categoryCheckerIterator = categoryCheckerList.listIterator();
-                while (categoryCheckerIterator.hasNext()) {
-                    CategoryChecker next = categoryCheckerIterator.next();
-                    if (next.isChecked()) {
-                        categoriesSet.add(next.getCategory());
-                    }
-                }
-                product.setCategories(categoriesSet);
-                product.setDate(new Date());
-                productService.insertProduct(product);
-                setResponsePage(Index.class);
-            }
-        });
-    }
-
-    /**
-     * Create list of existing categories component and save it to the relatedCategoriesList class member
-     * list consist of a checkboxes, and to represent the category relation we are using CategoryChecker class
-     */
-    public void createCategoriesList(){
-        List<Category> categories = this.categoryService.loadAllCategories();
-        ListIterator<Category> categoryListIterator = categories.listIterator();
-        while (categoryListIterator.hasNext()) {
-            this.categoryCheckerList.add(new CategoryChecker(categoryListIterator.next()));
-        }
-        relatedCategoriesList = new ListView<CategoryChecker>("categoryList", this.categoryCheckerList) {
-            protected void populateItem(ListItem<CategoryChecker> item) {
-                CategoryChecker categoryWrapper = item.getModelObject();
-                item.add(new Label("name", categoryWrapper.getCategory().getName()));
-                item.add(new CheckBox("check", new PropertyModel(categoryWrapper, "checked")));
-            }
-        };
-        relatedCategoriesList.setReuseItems(true);
-    }
-
     public ProductInsert() {
-        this.product = new Product();
-        this.categoryCheckerList = new ArrayList<CategoryChecker>();
-        this.insertProductFeedbackPanel = new FeedbackPanel("feedback");
+        add(new ProductForm("form"));
+        add(new FeedbackPanel("feedback"));
+    }
 
-        createInsertProductForm();
+    public final class RelatedCategoriesListView extends ListView<CategoryChecker> {
 
-        add(insertProductFeedbackPanel);
-        add(insertProductForm);
+        public RelatedCategoriesListView(final String id, List<CategoryChecker> list) {
+            super(id, list);
+        }
+
+        @Override
+        protected void populateItem(ListItem<CategoryChecker> item) {
+            CategoryChecker categoryWrapper = item.getModelObject();
+            item.add(new Label("name", categoryWrapper.getCategory().getName()));
+            item.add(new CheckBox("check", new PropertyModel(categoryWrapper, "checked")));
+        }
+    }
+
+    public final class KeywordsPropertyModel extends PropertyModel {
+        /**
+         * Construct with a wrapped (IModel) or unwrapped (non-IModel) object and a property expression
+         * that works on the given model.
+         * @param modelObject The model object, which may or may not implement IModel
+         * @param expression  Property expression for property access
+         */
+        public KeywordsPropertyModel(Object modelObject, String expression) {
+            super(modelObject, expression);
+        }
+
+        @Override
+        public Object getObject() {
+            assert super.getObject() instanceof Set;
+            Set<String> keySet = (Set<String>) super.getObject();
+            String tags = null;
+            tags = StringUtils.join(keySet, ", ");
+            return tags;
+        }
+
+        @Override
+        public void setObject(Object object) {
+            assert object instanceof String;
+            String keywordsString = (String) object;
+            keywordsString = keywordsString.replaceAll("\\s{2,}", " ");
+            keywordsString = keywordsString.replaceAll("\\s+\\,", ",");
+            String[] keywords = keywordsString.split(",");
+            Set<String> keySet = new HashSet<String>();
+            for (String word : keywords) {
+                keySet.add(word);
+            }
+            super.setObject(keySet);
+        }
+    }
+
+    public final class ProductForm extends Form<Product> {
+
+        public ProductForm(final String id) {
+            super(id, new CompoundPropertyModel<Product>(new Product()));
+            Product product = getModelObject();
+            add(new RequiredTextField<String>("ProductName", new PropertyModel<String>(product, "name"), String.class)
+                    .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 35))
+                    .add(new PatternValidator("/[a-zA-Z,+-_]")));
+
+            add(new TextField<String>("ProductTags", new KeywordsPropertyModel(product, "keywords"), String.class)
+                    .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 35))
+                    .add(new PatternValidator("/[a-zA-Z,+-_]")));
+
+            add(new RequiredTextField<BigDecimal>("ProductPrice", new PropertyModel<BigDecimal>(product, "price"), BigDecimal.class));
+
+            add(new TextArea<String>("ProductDescription", new PropertyModel<String>(product, "description"))
+                    .setType(String.class)
+                    .setRequired(true)
+                    .add(StringValidator.lengthBetween(25,700))
+                    .add(new PatternValidator("/[a-zA-Z,+-_]"))
+            );
+            categoryCheckerList = new ArrayList<CategoryChecker>();
+            List<Category> categories = categoryService.loadAllCategories();
+            ListIterator<Category> categoryListIterator = categories.listIterator();
+            while (categoryListIterator.hasNext()) {
+                categoryCheckerList.add(new CategoryChecker(categoryListIterator.next()));
+            }
+            add(new RelatedCategoriesListView("categoryList", categoryCheckerList).setReuseItems(true));
+            setMarkupId("form");
+        }
+
+        @Override
+        public void onSubmit() {
+            Product product = getModelObject();
+            product.setDate(new Date());
+            Set<Category> categoriesSet = new HashSet<Category>();
+            ListIterator<CategoryChecker> categoryCheckerIterator = categoryCheckerList.listIterator();
+            while (categoryCheckerIterator.hasNext()) {
+                CategoryChecker next = categoryCheckerIterator.next();
+                if (next.isChecked()) {
+                    categoriesSet.add(next.getCategory());
+                }
+            }
+            product.setCategories(categoriesSet);
+            productService.insertProduct(product);
+            setResponsePage(Index.class);
+        }
     }
 
     /**
      * CategoryChecker class need for:
      * creating the list of the checkboxes witch represent all existing categories
      */
-    private static class CategoryChecker implements Serializable{
+    private static class CategoryChecker implements Serializable {
         private Category category;
         private boolean checked;
 
-        public void setChecked(boolean checked){
+        public void setChecked(boolean checked) {
             this.checked = true;
         }
 
-        public boolean getChecked(){
+        public boolean getChecked() {
             return this.checked;
         }
 

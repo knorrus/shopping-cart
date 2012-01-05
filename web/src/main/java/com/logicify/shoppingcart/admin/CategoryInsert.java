@@ -9,13 +9,6 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import java.util.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: knorr
- * Date: 12/30/11
- * Time: 2:04 PM
- * To change this template use File | Settings | File Templates.
- */
 public class CategoryInsert extends WebPage{
 
     @SpringBean(required = true)
