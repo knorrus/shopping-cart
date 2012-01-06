@@ -63,7 +63,20 @@ public class ProductService {
         mask = "%" + mask + "%";
         List products = null;
         try{
-            products = productDao.findProductsByMask(mask);
+            products = productDao.findProductsByName(mask);
+        }
+        catch (SQLException ex){
+            logger.error("Error", ex);
+        }
+        return products;
+    }
+
+
+    public List findProductsByTag (String mask){
+        mask = "%" + mask + "%";
+        List products = null;
+        try{
+            products = productDao.findProductsByTag(mask);
         }
         catch (SQLException ex){
             logger.error("Error", ex);

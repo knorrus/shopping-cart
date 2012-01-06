@@ -2,6 +2,7 @@ package com.logicify.shoppingcart.dao.impl;
 
 import com.logicify.shoppingcart.dao.ProductDao;
 import com.logicify.shoppingcart.domain.Product;
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
@@ -76,12 +77,29 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
         return products;
     }
 
-    public List findProductsByMask (String mask){
+    public List findProductsByName (String mask){
         List products = null;
         try {
             Session session = getSession();
             session.beginTransaction();
             products = session.createCriteria(Product.class).add(Restrictions.ilike("name", mask)).list();
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            logger.error("Error while searching product ", ex);
+        }
+        return products;
+    }
+
+    public List findProductsByTag (String mask) {
+        List products = null;
+        try{
+            Session session = getSession();
+            session.beginTransaction();
+            /*products = session.createSQLQuery("SELECT shopping_cart.product.* FROM shopping_cart.product INNER JOIN shopping_cart.tag ON  shopping_cart.tag.product_id = shopping_cart.product.id_product WHERE shopping_cart.tag.tag like :mask")
+                    .addEntity(Product.class)
+                    .setString("mask", mask)
+                    .list();*/
+            session.createQuery("SELECT p, p.keywords as k FROM Product p WHERE k.tag like :mask").setString("mask",mask).list();
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while searching product ", ex);

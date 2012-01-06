@@ -91,11 +91,11 @@ public class ProductInsert extends WebPage {
             Product product = getModelObject();
             add(new RequiredTextField<String>("ProductName", new PropertyModel<String>(product, "name"), String.class)
                     .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 35))
-                    .add(new PatternValidator("/[a-zA-Z,+-_]")));
+                    .add(new PatternValidator("[a-zA-Z0-9\\,\\+\\.\\s\\-\\_]{1,}")));
 
             add(new TextField<String>("ProductTags", new KeywordsPropertyModel(product, "keywords"), String.class)
-                    .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 35))
-                    .add(new PatternValidator("/[a-zA-Z,+-_]")));
+                    .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 100))
+                    .add(new PatternValidator("[a-zA-Z0-9\\,\\+\\.\\s\\-\\_]{1,}")));
 
             add(new RequiredTextField<BigDecimal>("ProductPrice", new PropertyModel<BigDecimal>(product, "price"), BigDecimal.class));
 
@@ -103,7 +103,6 @@ public class ProductInsert extends WebPage {
                     .setType(String.class)
                     .setRequired(true)
                     .add(StringValidator.lengthBetween(25,700))
-                    .add(new PatternValidator("/[a-zA-Z,+-_]"))
             );
             categoryCheckerList = new ArrayList<CategoryChecker>();
             List<Category> categories = categoryService.loadAllCategories();

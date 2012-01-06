@@ -25,5 +25,14 @@ public class Index extends WebPage {
         };
         categoryList.add(new Label("linksText", "List of Existing categories"));
         add(categoryList);
+
+        Link productSearch = new Link("linkToProductSearchPage"){
+            @Override
+            public void onClick() {
+                setResponsePage(new ProductSearch());
+            }
+        };
+        productSearch.add(new Label("linksText", "Search product"));
+        add(productSearch);
     }
 }

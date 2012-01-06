@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:wicket>
+
+
+<wicket:panel>
+
+    <div class="results" wicket:id="searchResult">
+        Search results
+    </div>
+
+    <wicket:fragment wicket:id="noResults">
+        <p wicket:id="errorMessage">No results</p>
+    </wicket:fragment>
+
+    <wicket:fragment wicket:id="results">
+        <ul>
+            <li wicket:id="productList">
+                <a href="ProductsList.html#" wicket:id="linkToProduct">
+                    <wicket:container wicket:id="linksText"/>
+                </a>
+                <br/>
+            </li>
+        </ul>
+    </wicket:fragment>
+
+    <wicket:fragment wicket:id="empty">
+
+    </wicket:fragment>
+</wicket:panel>
+
+</html>

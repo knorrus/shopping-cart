@@ -8,21 +8,25 @@
 
 </head>
 <body>
-    <div class="pageWrapper">
+<div class="pageWrapper">
 
-        <div id="header">
-            <h2>Hello! This is user interface for product/category module for online shopping cart</h2>
+    <div id="header">
+        <h2>Hello! This is user interface for product/category module for online shopping cart</h2>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="pageContentBlockFullSize">
+        <div class="pageContentLeftMedium">
+            <form wicket:id="searchForm">
+                <input type="text" wicket:id="keywordPattern">
+                <input type="submit" value="search">
+            </form>
         </div>
-
-        <div class="clear"></div>
-
-        <div class="pageContentBlockFullSize">
-            <div class="pageContentLeftMedium">
-                <form wicket:id="searchForm">
-                    <input type="text" wicket:id="keywordPattern">
-                </form>
-            </div>
+        <div class="pageContentRightMedium">
+            <div wicket:id="panel"></div>
         </div>
-     </div>
+    </div>
+</div>
 </body>
 </html>
