@@ -1,7 +1,9 @@
 package com.logicify.shoppingcart.admin;
 
 import com.logicify.shoppingcart.Index;
+import com.logicify.shoppingcart.components.converters.KeywordConverter;
 import com.logicify.shoppingcart.domain.Category;
+import com.logicify.shoppingcart.domain.Keyword;
 import com.logicify.shoppingcart.domain.Product;
 import com.logicify.shoppingcart.service.CategoryService;
 import com.logicify.shoppingcart.service.ProductService;
@@ -14,9 +16,10 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.util.convert.IConverter;
 import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+
 import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.*;
@@ -29,6 +32,8 @@ public class ProductInsert extends WebPage {
     private CategoryService categoryService;
 
     private List<CategoryChecker> categoryCheckerList;
+
+    private Set<Keyword> productKeywordsSet;
 
     public ProductInsert() {
         add(new ProductForm("form"));
@@ -49,41 +54,6 @@ public class ProductInsert extends WebPage {
         }
     }
 
-    public final class KeywordsPropertyModel extends PropertyModel {
-        /**
-         * Construct with a wrapped (IModel) or unwrapped (non-IModel) object and a property expression
-         * that works on the given model.
-         * @param modelObject The model object, which may or may not implement IModel
-         * @param expression  Property expression for property access
-         */
-        public KeywordsPropertyModel(Object modelObject, String expression) {
-            super(modelObject, expression);
-        }
-
-        @Override
-        public Object getObject() {
-            assert super.getObject() instanceof Set;
-            Set<String> keySet = (Set<String>) super.getObject();
-            String tags = null;
-            tags = StringUtils.join(keySet, ", ");
-            return tags;
-        }
-
-        @Override
-        public void setObject(Object object) {
-            assert object instanceof String;
-            String keywordsString = (String) object;
-            keywordsString = keywordsString.replaceAll("\\s{2,}", " ");
-            keywordsString = keywordsString.replaceAll("\\s+\\,", ",");
-            String[] keywords = keywordsString.split(",");
-            Set<String> keySet = new HashSet<String>();
-            for (String word : keywords) {
-                keySet.add(word);
-            }
-            super.setObject(keySet);
-        }
-    }
-
     public final class ProductForm extends Form<Product> {
 
         public ProductForm(final String id) {
@@ -93,7 +63,12 @@ public class ProductInsert extends WebPage {
                     .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 35))
                     .add(new PatternValidator("[a-zA-Z0-9\\,\\+\\.\\s\\-\\_]{1,}")));
 
-            add(new TextField<String>("ProductTags", new KeywordsPropertyModel(product, "keywords"), String.class)
+            add(new TextField<String>("ProductTags", new PropertyModel(product, "keywords"), String.class) {
+                @Override
+                public <C> IConverter<C> getConverter(Class<C> type) {
+                    return new KeywordConverter();
+                }
+            }
                     .add(StringValidator.LengthBetweenValidator.lengthBetween(3, 100))
                     .add(new PatternValidator("[a-zA-Z0-9\\,\\+\\.\\s\\-\\_]{1,}")));
 
@@ -102,8 +77,9 @@ public class ProductInsert extends WebPage {
             add(new TextArea<String>("ProductDescription", new PropertyModel<String>(product, "description"))
                     .setType(String.class)
                     .setRequired(true)
-                    .add(StringValidator.lengthBetween(25,700))
+                    .add(StringValidator.lengthBetween(25, 700))
             );
+
             categoryCheckerList = new ArrayList<CategoryChecker>();
             List<Category> categories = categoryService.loadAllCategories();
             ListIterator<Category> categoryListIterator = categories.listIterator();

@@ -22,16 +22,16 @@ public class Product implements Serializable{
     private Date date;
     private BigDecimal price;
     private Set categories = new HashSet();
-    private Set<String> keywords = new HashSet<String>();
+    private Set<Keyword> keywords;
 
     public Product() {
     }
 
-    public Set<String> getKeywords() {
+    public Set<Keyword> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(Set<String> keywords) {
+    public void setKeywords(Set<Keyword> keywords) {
         this.keywords = keywords;
     }
 

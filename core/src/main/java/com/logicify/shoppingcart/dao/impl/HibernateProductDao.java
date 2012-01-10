@@ -1,6 +1,7 @@
 package com.logicify.shoppingcart.dao.impl;
 
 import com.logicify.shoppingcart.dao.ProductDao;
+import com.logicify.shoppingcart.domain.Keyword;
 import com.logicify.shoppingcart.domain.Product;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
@@ -34,6 +35,7 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
             Session session = getSession();
             session.beginTransaction();
             session.save(product);
+
             session.getTransaction().commit();
         } catch (HibernateException ex) {
             logger.error("Error while insertion product", ex);

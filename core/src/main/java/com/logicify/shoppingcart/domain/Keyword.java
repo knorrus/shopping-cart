@@ -3,8 +3,8 @@ package com.logicify.shoppingcart.domain;
 import java.io.Serializable;
 
 public class Keyword implements Serializable{
-    String key, entityName;
-    Long entityId;
+    private String key, entityName;
+    private Long id, entityId;
 
     public String getKey() {
         return key;
@@ -20,6 +20,14 @@ public class Keyword implements Serializable{
 
     public void setEntityName(String entityName) {
         this.entityName = entityName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getEntityId() {

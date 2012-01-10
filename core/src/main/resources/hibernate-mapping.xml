@@ -16,7 +16,7 @@
         <property name="price" column="price" type="java.math.BigDecimal" precision="4"/>
         <property name="date" column="date" type="java.util.Date"/>
 
-        <set name="keywords" schema="shopping_cart" table="tag" lazy="true">
+        <set name="keywords" schema="shopping_cart" table="tag" where="entity_name='Product'" lazy="false">
             <key column="entity_id"/>
             <one-to-many class="Keyword"/>
         </set>
@@ -26,17 +26,6 @@
             <many-to-many column="category_id" class="com.logicify.shoppingcart.domain.Category"/>
         </set>
 
-    </class>
-
-    <class name="Keyword" schema="shopping_cart" table="tag">
-        
-        <composite-id>
-            <key-property name="entityId" column="entity_id"/>
-            <key-property name="entityName" column="entity_name"/>
-        </composite-id>
-        
-        <property name="key" column="key" type="java.lang.String"/>
-        
     </class>
 
     <class name="Category" schema="shopping_cart" table="category">
@@ -56,5 +45,15 @@
 
     </class>
 
+    <class name="Keyword" schema="shopping_cart" table="tag">
+        <id name="id" column="keyword_id" type="java.lang.Long">
+            <generator class="native">
+                <param name="sequence">shopping_cart.tag_id_seq</param>
+            </generator>
+        </id>
+        <property name="entityId" column="entity_id" type="java.lang.Long"/>
+        <property name="entityName" column="entity_name" type="java.lang.String"/>
+        <property name="key" column="keyword" type="java.lang.String"/>
+    </class>
 
 </hibernate-mapping>
