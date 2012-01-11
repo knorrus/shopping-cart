@@ -30,7 +30,7 @@ public class Index extends WebPage {
                 setResponsePage(new ProductInsert());
             }
         };
-        insertProduct.add(new Label("linksText", "Insert new product"));
+        insertProduct.add(new Label("linksText", "Insert new Product"));
         add(insertProduct);
 
         Link insertCategory = new Link("linkToInsertCategoryPage") {

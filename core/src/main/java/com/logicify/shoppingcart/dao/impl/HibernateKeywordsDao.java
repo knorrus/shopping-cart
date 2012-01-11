@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
+
 public class HibernateKeywordsDao extends HibernateDaoSupport implements KeywordsDao {
 
     private static final Logger logger = LoggerFactory.getLogger(HibernateKeywordsDao.class);
@@ -23,4 +27,23 @@ public class HibernateKeywordsDao extends HibernateDaoSupport implements Keyword
         }
     }
 
+    @Override
+    public void insertKeywords(Collection<Keyword> collection) throws SQLException {
+        if (collection.isEmpty()) {
+            return;
+        }
+        Session session = getSession();
+        Iterator<Keyword> iterator = collection.iterator();
+        session.beginTransaction();
+        while (iterator.hasNext()) {
+            try {
+                session.save(iterator.next());
+
+            } catch (HibernateException ex) {
+                logger.error("Error while trying to insert keyword ", ex);
+            }
+
+        }
+        session.getTransaction().commit();
+    }
 }

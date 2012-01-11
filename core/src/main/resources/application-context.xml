@@ -57,8 +57,14 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="keywordDao" class="com.logicify.shoppingcart.dao.impl.HibernateKeywordsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <bean id="productService" name="productService" class="com.logicify.shoppingcart.service.ProductService"/>
 
     <bean id="categoryService" name="categoryService" class="com.logicify.shoppingcart.service.CategoryService"/>
+
+    <bean id="keywordService" name="keywordService" class="com.logicify.shoppingcart.service.KeywordsService"/>
 
 </beans>

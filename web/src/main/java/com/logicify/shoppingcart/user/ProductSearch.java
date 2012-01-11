@@ -6,7 +6,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.Fragment;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.value.ValueMap;
@@ -21,8 +20,6 @@ public class ProductSearch extends WebPage{
     @SpringBean(required = true)
     private ProductService productService;
     private ProductSearchPanel results;
-
-
 
     public final class SearchProductForm extends Form<ValueMap>{
 
