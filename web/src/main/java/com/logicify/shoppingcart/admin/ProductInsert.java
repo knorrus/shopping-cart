@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.*;
 
-public class ProductInsert extends WebPage {
+public class ProductInsert extends AbstractAdminPage {
 
     @SpringBean(required = true)
     private ProductService productService;

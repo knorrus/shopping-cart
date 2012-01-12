@@ -31,7 +31,7 @@ import java.util.*;
  * Time: 9:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ProductInfo extends WebPage {
+public class ProductInfo extends AbstractAdminPage {
 
     @SpringBean(required = true)
     private ProductService productService;

@@ -2,29 +2,17 @@
       xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
       xml:lang="en"
       lang="en">
-<head>
-    <title>Product Page</title>
-    <link rel="stylesheet" href="css/AdminModule.css">
-</head>
 
-<body>
-<div class="pageWrapper">
-
-    <div id="header">
-        <h2>Product</h2>
-    </div>
-
-    <div class="clear"></div>
-
+<wicket:extend>
     <div class="pageContentBlockFullSize">
-
         <div class="pageContentLeftMedium feedback" wicket:id="feedback"></div>
         <div class="clear"></div>
-
         <form wicket:id="updateProductForm">
             <div class="pageContentLeftMedium">
                 <h3 wicket:id="productName"></h3>
+
                 <p wicket:id="productDescription"></p>
+
                 <p wicket:id="productPrice"></p>
             </div>
 
@@ -41,7 +29,5 @@
             <input type="submit" wicket:id="submitForm" value="OK">
         </form>
     </div>
-</div>
-</body>
-
+</wicket:extend>
 </html>

@@ -32,7 +32,7 @@ import java.util.*;
  * public class ProductInfo extends WebPage{
  */
 
-public class CategoryInfo extends WebPage {
+public class CategoryInfo extends AbstractAdminPage {
     @SpringBean(required = true)
     private CategoryService categoryService;
 

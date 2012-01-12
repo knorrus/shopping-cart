@@ -2,20 +2,8 @@
       xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
       xml:lang="en"
       lang="en">
-<head>
-    <title>User module</title>
-    <link rel="stylesheet" href="css/AdminModule.css">
 
-</head>
-<body>
-<div class="pageWrapper">
-
-    <div id="header">
-        <h2>Hello! This is user interface for product/category module for online shopping cart</h2>
-    </div>
-
-    <div class="clear"></div>
-
+<wicket:extend>
     <div class="pageContentBlockFullSize">
         <div class="pageContentLeftMedium">
             <form wicket:id="searchForm">
@@ -27,6 +15,6 @@
             <div wicket:id="panel"></div>
         </div>
     </div>
-</div>
-</body>
+</wicket:extend>
+
 </html>

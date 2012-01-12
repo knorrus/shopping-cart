@@ -9,7 +9,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import java.util.*;
 
-public class CategoryInsert extends WebPage{
+public class CategoryInsert extends AbstractAdminPage{
 
     @SpringBean(required = true)
     private CategoryService categoryService;

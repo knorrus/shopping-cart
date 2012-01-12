@@ -1,10 +1,8 @@
 package com.logicify.shoppingcart.user;
 
-import com.logicify.shoppingcart.admin.CategoryInfo;
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 import com.logicify.shoppingcart.service.ProductService;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -27,7 +25,7 @@ import java.util.Set;
  * Time: 3:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ProductDetails extends WebPage{
+public class ProductDetails extends AbstractUserPage{
     @SpringBean(required = true)
     private ProductService service;
 

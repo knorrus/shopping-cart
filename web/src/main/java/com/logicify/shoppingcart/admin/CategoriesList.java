@@ -11,7 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;
 
-public class CategoriesList extends WebPage{
+public class CategoriesList extends AbstractAdminPage{
 
     @SpringBean(required = true)
     private CategoryService service;

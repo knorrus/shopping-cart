@@ -7,8 +7,7 @@ package com.logicify.shoppingcart;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-import com.logicify.shoppingcart.admin.CategoryInfo;
-import com.logicify.shoppingcart.admin.ProductInfo;
+import com.logicify.shoppingcart.admin.*;
 import com.logicify.shoppingcart.components.converters.ShoppingCartConverterLocator;
 import org.apache.wicket.IConverterLocator;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -27,8 +26,13 @@ public class ShoppingCartApplication extends WebApplication {
         super.init();
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
-        mountPage("/shopping-cart/product", ProductInfo.class);
-        mountPage("/shopping-cart/category", CategoryInfo.class);
+        //admin module
+        mountPage("/shopping-cart/admin/products/", ProductsList.class);
+        mountPage("/shopping-cart/admin/categories/", CategoriesList.class);
+        mountPage("/shopping-cart/admin/product/", ProductInfo.class);
+        mountPage("/shopping-cart/admin/category/", CategoryInfo.class);
+        mountPage("/shopping-cart/admin/search/", ProductSearch.class);
+
     }
 
     @Override

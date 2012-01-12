@@ -15,7 +15,7 @@ import org.apache.wicket.validation.validator.StringValidator;
 import java.util.List;
 
 
-public class ProductSearch extends WebPage{
+public class ProductSearch extends AbstractUserPage{
 
     @SpringBean(required = true)
     private ProductService productService;

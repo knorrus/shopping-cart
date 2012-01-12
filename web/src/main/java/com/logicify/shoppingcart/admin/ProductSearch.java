@@ -28,7 +28,7 @@ import java.util.List;
  * Time: 2:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ProductSearch extends WebPage {
+public class ProductSearch extends AbstractAdminPage {
 
     @SpringBean(required = true)
     private ProductService productService;

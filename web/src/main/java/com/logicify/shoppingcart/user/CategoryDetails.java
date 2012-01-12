@@ -1,10 +1,8 @@
 package com.logicify.shoppingcart.user;
 
-import com.logicify.shoppingcart.admin.ProductInfo;
 import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 import com.logicify.shoppingcart.service.CategoryService;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -25,7 +23,7 @@ import java.util.*;
  * public class ProductInfo extends WebPage{
  */
 
-public class CategoryDetails extends WebPage {
+public class CategoryDetails extends AbstractUserPage {
     @SpringBean(required = true)
     private CategoryService service;
 

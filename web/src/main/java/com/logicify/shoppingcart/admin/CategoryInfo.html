@@ -2,20 +2,8 @@
       xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
       xml:lang="en"
       lang="en">
-<head>
-    <title>Category Page</title>
-    <link rel="stylesheet" href="css/AdminModule.css">
-</head>
 
-<body>
-<div class="pageWrapper">
-
-    <div id="header">
-        <h2>Category</h2>
-    </div>
-
-    <div class="clear"></div>
-
+<wicket:extend>
     <div class="pageContentBlockFullSize">
         <form wicket:id="updateCategoryForm">
             <div class="pageContentLeftMedium">
@@ -23,7 +11,6 @@
 
                 <p wicket:id="categoryDescription"></p>
             </div>
-
             <div class="pageContentRightMedium">
                 <h3>Products in category:</h3>
                 <ul>
@@ -34,11 +21,9 @@
                     </li>
                 </ul>
             </div>
-
             <input type="submit" wicket:id="submitForm" value="OK">
         </form>
     </div>
-</div>
-</body>
+</wicket:extend>
 
 </html>

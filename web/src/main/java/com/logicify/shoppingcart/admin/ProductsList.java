@@ -19,7 +19,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;
 
-public class ProductsList extends WebPage {
+public class ProductsList extends AbstractAdminPage {
 
     @SpringBean(required = true)
     private ProductService service;
