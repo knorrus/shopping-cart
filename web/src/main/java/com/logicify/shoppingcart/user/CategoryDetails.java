@@ -44,7 +44,7 @@ public class CategoryDetails extends WebPage {
 
             protected void populateItem(ListItem<Product> item) {
                 Product product = item.getModelObject();
-                BookmarkablePageLink<Product> linkToProduct = new BookmarkablePageLink<Product>("linkToProduct", ProductInfo.class);
+                BookmarkablePageLink<Product> linkToProduct = new BookmarkablePageLink<Product>("linkToProduct", ProductDetails.class);
                 linkToProduct.getPageParameters().set("id", product.getId());
                 linkToProduct.add(new Label("linksText", product.getName()));
                 item.add(linkToProduct);

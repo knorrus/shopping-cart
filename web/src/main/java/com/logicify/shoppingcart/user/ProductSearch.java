@@ -45,6 +45,7 @@ public class ProductSearch extends WebPage{
                 responsePanel = results.createResultListFragment(products);
             }
             results.setFragment(responsePanel);
+
         }
     }
 
