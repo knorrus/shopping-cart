@@ -8,6 +8,7 @@ package com.logicify.shoppingcart.dao;
  * To change this template use File | Settings | File Templates.
  */
 
+import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 
 import java.sql.SQLException;
@@ -26,4 +27,6 @@ public interface ProductDao {
     public List findProductsByName (String mask) throws SQLException;
 
     public List findProductsByTag (String mask) throws SQLException;
+
+      public List findProductsByTagFilteredByCategory (String mask, Category category) throws SQLException;
 }

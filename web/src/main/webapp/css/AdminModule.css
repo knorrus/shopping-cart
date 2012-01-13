@@ -84,8 +84,23 @@ div.MainMenu table  td{
     background-color: #f5deb3;
 }
 
-
 div.MaimMenu .MenuItem {
     text-align: center;
+}
+
+div.CategoryFilter {
+    margin: 10px 0px;
+    position: relative;
+    background-color: white;
+    border: 2px solid black;
+    width: 200px;
+    height:300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+}
+
+.categoryCheckBox {
+    float: right;
 }
 

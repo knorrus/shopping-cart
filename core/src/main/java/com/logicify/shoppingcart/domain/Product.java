@@ -10,6 +10,7 @@ package com.logicify.shoppingcart.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +25,20 @@ public class Product implements Serializable{
     private Set categories = new HashSet();
     private Set<Keyword> keywords;
 
+    private static NameComparator nameComparator = new NameComparator();
+    private static PriceComparator priceComparator = new PriceComparator();
+
     public Product() {
     }
+
+
+     public static Comparator getNameComparator() {
+           return nameComparator;
+     }
+
+     public static Comparator getPriceComparator() {
+           return priceComparator;
+     }
 
     public Set<Keyword> getKeywords() {
         return keywords;
@@ -104,6 +117,20 @@ public class Product implements Serializable{
             }
         }
         return false;
+    }
+
+    public static class NameComparator implements Comparator<Product> {
+        @Override
+        public int compare(Product product, Product product1) {
+            return product.getName().compareTo(product1.getName());
+        }
+    }
+
+    public static class PriceComparator implements Comparator<Product> {
+        @Override
+        public int compare(Product product, Product product1) {
+            return product.getPrice().compareTo(product1.getPrice());
+        }
     }
 
 }

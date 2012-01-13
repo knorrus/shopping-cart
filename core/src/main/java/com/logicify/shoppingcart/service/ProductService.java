@@ -1,11 +1,13 @@
 package com.logicify.shoppingcart.service;
 
 import com.logicify.shoppingcart.dao.ProductDao;
+import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
 
@@ -80,6 +82,21 @@ public class ProductService {
         }
         catch (SQLException ex){
             logger.error("Error", ex);
+        }
+        return products;
+    }
+
+
+    public List findProductsByTagFilteredByCategories (String mask, List<Category> list){
+        mask = "%" + mask + "%";
+        List products = new ArrayList();
+        for (Category category : list){
+            try{
+                products.addAll(productDao.findProductsByTagFilteredByCategory(mask, category));
+            }
+            catch (SQLException ex){
+                logger.error("Error", ex);
+            }
         }
         return products;
     }

@@ -5,15 +5,42 @@
 
 <wicket:extend>
     <div class="pageContentBlockFullSize">
+
         <div class="pageContentLeftMedium">
+            <div class="feedback" wicket:id="feedback"></div>
+
             <form wicket:id="searchForm">
                 <input type="text" wicket:id="keywordPattern">
+                <br/>
+                <select  wicket:id="sortCriteria">
+                    <option selected value="name">Name</option>
+                    <option value="price">Price</option>
+                </select>
+
+                <select wicket:id="sortOrder">
+                    <option selected value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
+                <br/>
+
+                <div class="CategoryFilter">
+                    <li wicket:id="categoryList">
+                        <span wicket:id="name" class="categoryName">categoryName</span>
+                        <input wicket:id="check" type="checkbox" class="categoryCheckBox"/>
+                        <br/>
+                    </li>
+                </div>
+
                 <input type="submit" value="search">
             </form>
         </div>
+
+
+
         <div class="pageContentRightMedium">
             <div wicket:id="panel"></div>
         </div>
+
     </div>
 </wicket:extend>
 

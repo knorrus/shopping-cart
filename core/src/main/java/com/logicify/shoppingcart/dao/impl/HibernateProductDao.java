@@ -1,6 +1,7 @@
 package com.logicify.shoppingcart.dao.impl;
 
 import com.logicify.shoppingcart.dao.ProductDao;
+import com.logicify.shoppingcart.domain.Category;
 import com.logicify.shoppingcart.domain.Keyword;
 import com.logicify.shoppingcart.domain.Product;
 import org.hibernate.FetchMode;
@@ -99,6 +100,22 @@ public class HibernateProductDao extends HibernateDaoSupport implements ProductD
             products = session.createCriteria(Product.class).createCriteria("keywords").add(Restrictions.ilike("key",mask)).list();
         } catch (HibernateException ex) {
             logger.error("Error while searching product ", ex);
+        }
+        return products;
+    }
+
+     public List findProductsByTagFilteredByCategory (String mask, Category category) {
+        List products = null;
+        try{
+            Session session = getSession();
+            products = session.createCriteria(Product.class)
+                .createAlias("keywords", "k")
+                .createCriteria("categories", "c")
+                .add(Restrictions.ilike("k.key",mask))
+                .add(Restrictions.eq("c.id", category.getId()))
+                .list();
+        } catch (HibernateException ex) {
+            logger.error("Error while searching product by tag and category ", ex);
         }
         return products;
     }
