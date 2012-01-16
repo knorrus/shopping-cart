@@ -1,2 +1,0 @@
-mvn install:install-file -Dfile=kefir-bb-0.6.jar -DgroupId=ru.perm -DartifactId=KefirBB -Dversion=0.6 -Dpackaging=jar
-

@@ -10,10 +10,10 @@ SET client_min_messages = warning;
 SET escape_string_warning = off;
 
 --
--- Name: ShopingCart; Type: COMMENT; Schema: -; Owner: ShoppingCartOwner
+-- Name: ShoppingCart; Type: COMMENT; Schema: -; Owner: ShoppingCartOwner
 --
 
-COMMENT ON DATABASE "ShopingCart" IS 'Logicify online shoping cart database';
+COMMENT ON DATABASE "ShoppingCart" IS 'Logicify online shoping cart database';
 
 
 --
