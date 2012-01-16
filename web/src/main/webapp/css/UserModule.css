@@ -1,0 +1,128 @@
+body {
+    background: url(/images/rdbrick.jpg) repeat;
+    font: normal 14px Georgia, "Narrow Roman Oblique", Helvetica, serif;
+    color: white;
+}
+
+.pageWrapper {
+    position: absolute;
+    width: 1200px;
+    min-height: 600px;
+    left: 50%;
+    margin-left: -600px;
+    top: 100px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    border: 3px white ridge;
+}
+
+a {
+    color: #00ffea; !important
+    font-size:20px;
+	line-height:22px;
+}
+
+#header {
+    margin: 0 auto;
+    vertical-align: middle;
+    text-align: center;
+    height: 75px;
+    overflow-y: hidden;
+}
+
+.Footer {
+    height: 20px;
+    text-align: center;
+}
+
+.pageContentBlockFullSize {
+    min-height: 470px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+div {
+    overflow: auto;
+}
+
+.pageContentRightBig, .pageContentLeftBig {
+    width: 73%;
+    padding: 1%;
+}
+
+.pageContentLeftMedium, .pageContentRightMedium {
+    width: 48%;
+    padding: 1%;
+}
+
+.pageContentRightSmall,.pageContentLeftSmall {
+    width: 23%;
+    padding: 1%;
+}
+
+.pageContentRightBig, .pageContentRightMedium, .pageContentRightSmall{
+    float:right;
+}
+
+.pageContentLeftBig, .pageContentLeftMedium, .pageContentLeftSmall{
+    float:left;
+}
+
+form.insertProductForm .LeftColumnName{
+    width: 130px;
+}
+
+form.insertProductForm input[type="text"] {
+    width: 50%;
+    border: 2px solid #fa8072;
+
+}
+
+.feedback {
+    position: relative !important;
+    display: block;
+}
+
+div.MainMenu {
+    position: relative;
+    overflow: auto;
+}
+
+div.MainMenu table {
+    margin: auto;
+}
+
+div.MainMenu table  td{
+    text-align: center;
+    min-width: 120px;
+}
+
+div.MaimMenu .MenuItem {
+    text-align: center;
+}
+
+div.CategoryFilter {
+    margin: 10px 0px;
+    position: relative;
+    width: 200px;
+    height:300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+}
+
+span.CategoryName {
+    display: inline-block;
+    min-width: 150px;
+}
+
+.AboutUs {
+    padding: 10px;
+    font-size:18px;
+	line-height:20px;
+}
+

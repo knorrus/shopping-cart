@@ -48,23 +48,29 @@ public class ProductSearch extends AbstractUserPage {
         private List<String> criteriaChoices = Arrays.asList(new String[]{"name", "price"});
 
         private List<CategoryChecker> categoryCheckers;      //wrappers on the categories
-        List<Category> categories;      // all existing categories
+        private List<Category> categories;      // all existing categories
+        private Category metaCategory; //meta category - "all" product filter
 
         public SearchProductForm(final String id) {
             super(id, new CompoundPropertyModel<ValueMap>(new ValueMap()));
+
             add(new RequiredTextField<String>("keywordPattern", String.class)
                     .add(StringValidator.lengthBetween(3, 25))
                     .add(new PatternValidator("[a-zA-Z0-9\\,\\+\\.\\s\\-\\_]{1,}"))
             );
+
             //Select components for sort order
-            add(new DropDownChoice("sortOrder", new PropertyModel(this, "sortOrder"), orderChoices).setRequired(true));
-            add(new DropDownChoice("sortCriteria", new PropertyModel(this, "sortCriteria"), criteriaChoices).setRequired(true));
+            add(new DropDownChoice("sortOrder", new PropertyModel(this, "sortOrder"), orderChoices)
+                    .setRequired(true));
+            add(new DropDownChoice("sortCriteria", new PropertyModel(this, "sortCriteria"), criteriaChoices)
+                    .setRequired(true));
+
             //Create category filter list view
             categories = categoryService.loadAllCategories();
             categoryCheckers = new ArrayList<CategoryChecker>();
-            Category metaFilter = new Category();
-            metaFilter.setName("all");
-            categoryCheckers.add(new CategoryChecker(metaFilter));
+            metaCategory = new Category();
+            metaCategory.setName("all");
+            categoryCheckers.add(new CategoryChecker(metaCategory));
             if (!categories.isEmpty()) {
                 Iterator<Category> iterator = categories.iterator();
                 while (iterator.hasNext()) {
@@ -78,24 +84,26 @@ public class ProductSearch extends AbstractUserPage {
         protected void onSubmit() {
             ValueMap values = getModelObject();
             String keyPattern = values.getString("keywordPattern");
+            List<Product> products;
 
             //get category filters result
             List<Category> allCategories = new ArrayList<Category>();
-            List<Product> products = null;
-            if (categoryCheckers.isEmpty() || categoryCheckers.get(0).isChecked()) {
+            for (CategoryChecker categoryChecker : categoryCheckers) {
+                if (categoryChecker.isChecked()) {
+                    allCategories.add(categoryChecker.getCategory());
+                }
+            }
+
+            if (allCategories.isEmpty() || categoryCheckers.get(0).isChecked()) {
                 //no filters or "all" categories
                 products = productService.findProductsByTag(keyPattern);
                 for (CategoryChecker checker : categoryCheckers) {
-                    checker.unCheck();
-                }
-
-            } else {
-                //search by filter list
-                for (CategoryChecker categoryChecker : categoryCheckers) {
-                    if (categoryChecker.isChecked()) {
-                        allCategories.add(categoryChecker.getCategory());
+                    if (!checker.getCategory().getName().equals("all")) {
+                        checker.unCheck();
                     }
                 }
+            } else {
+                //search by filter list
                 products = productService.findProductsByTagFilteredByCategories(keyPattern, allCategories);
             }
             //Chose necessary panel
